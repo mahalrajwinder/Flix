@@ -37,7 +37,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
         task.resume()
+        
+        // Sets movie cell height based on device's screen width
+        let heightRatio = UIScreen.main.bounds.width / 414
+        tableView.rowHeight = 172 * heightRatio
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
@@ -61,5 +66,5 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell
     }
-
+    
 }
