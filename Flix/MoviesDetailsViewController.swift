@@ -38,6 +38,21 @@ class MoviesDetailsViewController: UIViewController {
         let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
         
         backdropView.af_setImage(withURL: backdropUrl!)
+        
+        // Adding tap action to poster
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MoviesDetailsViewController.posterTapped))
+        posterView.addGestureRecognizer(tap)
+        posterView.isUserInteractionEnabled = true
     }
-
+    
+    @objc func posterTapped()
+    {
+        performSegue(withIdentifier: "showTrailer", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let trailerViewController = segue.destination as! movieTrailerViewController
+        trailerViewController.movieId = movie["id"] as? Int
+    }
+    
 }

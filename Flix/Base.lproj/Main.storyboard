@@ -115,11 +115,55 @@
                         <outlet property="posterView" destination="Tec-Ip-PGf" id="AeS-cr-m0S"/>
                         <outlet property="synopsisLabel" destination="RfH-Bj-z3P" id="gLn-xL-r3U"/>
                         <outlet property="titleLabel" destination="HsT-n7-ddi" id="vcD-TV-g0h"/>
+                        <segue destination="PXf-PE-94l" kind="presentation" identifier="showTrailer" id="mPp-xD-RiM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Idm-FU-ZVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="222" y="1029"/>
+        </scene>
+        <!--Movie Trailer View Controller-->
+        <scene sceneID="utw-kq-QdU">
+            <objects>
+                <viewController id="PXf-PE-94l" customClass="movieTrailerViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v3E-bg-ETS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p9K-Jr-X8n">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="Trailer" id="NAF-2g-x5F">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="FW6-0W-cxz">
+                                            <connections>
+                                                <action selector="hideTrailer:" destination="PXf-PE-94l" id="JG9-WI-eAc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sd-O5-E80">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="dE0-UU-eAL"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="7sd-O5-E80" id="c4C-Ul-Hl3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EYz-Lr-Vw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="221.73913043478262" y="1742.4107142857142"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TT1-N2-YH8">
