@@ -90,6 +90,7 @@
                                 <rect key="frame" x="34" y="269" width="120" height="175"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsT-n7-ddi">
                                 <rect key="frame" x="162" y="358" width="232" height="24"/>
@@ -118,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Idm-FU-ZVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442" y="1002"/>
+            <point key="canvasLocation" x="222" y="1029"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TT1-N2-YH8">
@@ -192,6 +193,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="posterView" destination="Akt-dW-04i" id="jGu-Wb-xP6"/>
+                                            <segue destination="UXZ-XC-8Uv" kind="show" id="OIi-YS-8Wx"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -233,4 +235,7 @@
         <image name="now_playing_tabbar_item" width="21" height="21"/>
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="t0Y-PU-lRV"/>
+    </inferredMetricsTieBreakers>
 </document>
