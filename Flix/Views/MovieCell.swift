@@ -2,8 +2,7 @@
 //  MovieCell.swift
 //  Flix
 //
-//  Created by Rajwinder on 4/12/19.
-//  Copyright © 2019 Rajwinder. All rights reserved.
+//  Copyright © 2019 Rajwinder Singh. All rights reserved.
 //
 
 import UIKit
