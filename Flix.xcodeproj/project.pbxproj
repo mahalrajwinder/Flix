@@ -99,6 +99,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		551D7F092329A4DC00860939 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		551D7F0A2329A4E900860939 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		551D7F0B2329A4F400860939 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		551D7F0C2329A4FF00860939 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				550086EF226168CE001BE164 /* MovieCell.swift */,
+				55190773226AB55E00DA372B /* MovieGridCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		551D7F0D2329A50700860939 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				55266A6422604A8A0093DE1C /* MoviesViewController.swift */,
+				559AAFA4226AA7620048FA29 /* MovieGridViewController.swift */,
+				559AAFA2226A9B7A0048FA29 /* MoviesDetailsViewController.swift */,
+				55C225FF226AEA410051898C /* movieTrailerViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		551D7F0E2329A51400860939 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				55266A3A226049610093DE1C /* Main.storyboard */,
+				55266A3F226049620093DE1C /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		55266A2A226049610093DE1C = {
 			isa = PBXGroup;
 			children = (
@@ -124,17 +174,15 @@
 		55266A35226049610093DE1C /* Flix */ = {
 			isa = PBXGroup;
 			children = (
+				551D7F0E2329A51400860939 /* Storyboards */,
+				551D7F0D2329A50700860939 /* Controllers */,
+				551D7F0C2329A4FF00860939 /* Views */,
+				551D7F0B2329A4F400860939 /* Models */,
+				551D7F0A2329A4E900860939 /* Helpers */,
+				551D7F092329A4DC00860939 /* Enums */,
 				55266A36226049610093DE1C /* AppDelegate.swift */,
-				55266A3A226049610093DE1C /* Main.storyboard */,
 				55266A3D226049620093DE1C /* Assets.xcassets */,
-				55266A3F226049620093DE1C /* LaunchScreen.storyboard */,
 				55266A42226049620093DE1C /* Info.plist */,
-				55266A6422604A8A0093DE1C /* MoviesViewController.swift */,
-				559AAFA2226A9B7A0048FA29 /* MoviesDetailsViewController.swift */,
-				559AAFA4226AA7620048FA29 /* MovieGridViewController.swift */,
-				550086EF226168CE001BE164 /* MovieCell.swift */,
-				55190773226AB55E00DA372B /* MovieGridCell.swift */,
-				55C225FF226AEA410051898C /* movieTrailerViewController.swift */,
 			);
 			path = Flix;
 			sourceTree = "<group>";
