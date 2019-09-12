@@ -71,7 +71,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442" y="301"/>
+            <point key="canvasLocation" x="700" y="329"/>
         </scene>
         <!--Movies Details View Controller-->
         <scene sceneID="8Ee-U5-ei5">
@@ -171,8 +171,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="t6w-cr-M6g" kind="relationship" relationship="viewControllers" id="K4f-OM-ymz"/>
                         <segue destination="i64-e9-1dt" kind="relationship" relationship="viewControllers" id="5OL-FW-2d3"/>
+                        <segue destination="t6w-cr-M6g" kind="relationship" relationship="viewControllers" id="K4f-OM-ymz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PtF-Mf-Et0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -196,7 +196,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4P-xg-MJV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442" y="-401"/>
+            <point key="canvasLocation" x="701" y="-408"/>
         </scene>
         <!--Superhero-->
         <scene sceneID="jVL-mb-twu">
@@ -249,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SNf-NK-GGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892.75362318840587" y="300.66964285714283"/>
+            <point key="canvasLocation" x="-268" y="329"/>
         </scene>
         <!--Superhero-->
         <scene sceneID="few-M0-RgH">
@@ -268,7 +268,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XTs-9a-9g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892.75362318840587" y="-401.11607142857139"/>
+            <point key="canvasLocation" x="-267" y="-408"/>
         </scene>
     </scenes>
     <resources>

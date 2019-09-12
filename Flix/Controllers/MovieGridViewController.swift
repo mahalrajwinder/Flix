@@ -12,7 +12,7 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var movies = [[String:Any]]()
+    var movies = [Movie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +36,20 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
             if let error = error {
                 print(error.localizedDescription)
             } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+                let moviesJSON = dataDictionary["results"] as! [[String: Any]]
                 
-                self.movies = dataDictionary["results"] as! [[String:Any]]
-                
+                for movie in moviesJSON
+                {
+                    let movie = Movie(title: movie["title"] as! String,
+                                      overview: movie["overview"] as! String,
+                                      releaseDate: movie["release_date"] as! String,
+                                      posterPath: movie["poster_path"] as! String,
+                                      backdropPath: movie["backdrop_path"] as! String,
+                                      avgVotes: movie["vote_average"] as! Double,
+                                      id: movie["id"] as! Int)
+                    self.movies.append(movie)
+                }
                 self.collectionView.reloadData()
             }
         }
@@ -56,7 +66,7 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let movie = movies[indexPath.item]
         
         let baseUrl = "https://image.tmdb.org/t/p/w185"
-        let posterPath = movie["poster_path"] as! String
+        let posterPath = movie.posterPath
         let posterUrl = URL(string: baseUrl + posterPath)
         
         cell.posterView.af_setImage(withURL: posterUrl!)

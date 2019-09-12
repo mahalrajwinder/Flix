@@ -13,8 +13,8 @@ struct Movie
     let title: String
     let overview: String
     let releaseDate: String
-    let posterPath: Any
-    let backdropPath: Any
+    let posterPath: String
+    let backdropPath: String
     let avgVotes: Double
     let id: Int
 }
