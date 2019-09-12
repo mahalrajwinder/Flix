@@ -10,12 +10,20 @@ import WebKit
 
 class movieTrailerViewController: UIViewController, WKUIDelegate {
     
-    @IBOutlet weak var webView: WKWebView!
+    var webView: WKWebView!
     
     var movieId : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add webview
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: CGRect(x: 0, y: 88, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height - 88)), configuration: webConfiguration)
+        webView.allowsBackForwardNavigationGestures = true
+        webView.uiDelegate = self
+        view.addSubview(webView)
+        
         
         let urlPartOne = "https://api.themoviedb.org/3/movie/"
         let urlPartTwo = "/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
