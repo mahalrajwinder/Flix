@@ -8,110 +8,87 @@
 import UIKit
 
 
-func getDataDictionary(url: URL) -> [String: Any]
+func getDataDictionary(url: URL, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ())
 {
-    var dataDictionary = [String: Any]()
-    
-    let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+    let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
     let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
     
     let task = session.dataTask(with: request) { (data, response, error) in
-        // This will run when the network request returns
         if let error = error {
-            print(error.localizedDescription)
+            failure(error)
         } else if let data = data {
-            dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+            let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
+            success(dataDictionary)
         }
     }
     task.resume()
-    return dataDictionary
 }
 
 
-func getMoviesArray(url: URL) -> [Movie]
+func getMoviesArray(dataDictionary: NSDictionary) -> [Movie]
 {
-    var movies = [Movie]()
-    let moviesJSON = getDataDictionary(url: url)["results"] as! [[String: Any]]
+    var movies = [] as! [Movie]
+    let moviesJSON = dataDictionary["results"] as! [NSDictionary]
     
     for movie in moviesJSON
     {
         let movie = Movie(title: movie["title"] as! String,
                           overview: movie["overview"] as! String,
                           releaseDate: movie["release_date"] as! String,
-                          posterPath: movie["poster_path"] as Any,
-                          backdropPath: movie["backdrop_path"] as Any,
+                          posterPath: movie["poster_path"] as! String,
+                          backdropPath: movie["backdrop_path"] as! String,
                           avgVotes: movie["vote_average"] as! Double,
                           id: movie["id"] as! Int)
         movies.append(movie)
     }
+    
     return movies
 }
 
 
-func getLatestMovie() -> Movie
+func getLatestMovie() -> URL
 {
-    let url = URL(string: Url.baseUrl.rawValue + "latest?api_key=" + Url.APIKey.rawValue)!
-    let movieData = getDataDictionary(url: url)
-    
-    return Movie(title: movieData["title"] as! String,
-                 overview: movieData["overview"] as! String,
-                 releaseDate: movieData["release_date"] as! String,
-                 posterPath: movieData["poster_path"] as Any,
-                 backdropPath: movieData["backdrop_path"] as Any,
-                 avgVotes: movieData["vote_average"] as! Double,
-                 id: movieData["id"] as! Int)
+    return URL(string: Url.baseUrl.rawValue + "latest?api_key=" + Url.APIKey.rawValue)!
 }
 
 
-func getDailyTrending(numPage: Int) -> [Movie]
+func getDailyTrending(numPage: Int) -> URL
 {
     let page = "&page=" + String(numPage)
-    let url = URL(string: "https://api.themoviedb.org/3/trending/movie/day?api_key=" + Url.APIKey.rawValue + page)!
-    
-    return getMoviesArray(url: url)
+    return URL(string: "https://api.themoviedb.org/3/trending/movie/day?api_key=" + Url.APIKey.rawValue + page)!
 }
 
 
-func getNowPlaying(numPage: Int) -> [Movie]
+func getNowPlaying(numPage: Int) -> URL
 {
     let page = "&page=" + String(numPage)
-    let url = URL(string: Url.baseUrl.rawValue + "now_playing?api_key=" + Url.APIKey.rawValue + page)!
-    
-    return getMoviesArray(url: url)
+    return URL(string: Url.baseUrl.rawValue + "now_playing?api_key=" + Url.APIKey.rawValue + page)!
 }
 
 
-func getUpcoming(numPage: Int) -> [Movie]
+func getUpcomingURL(numPage: Int) -> URL
 {
     let page = "&page=" + String(numPage)
-    let url = URL(string: Url.baseUrl.rawValue + "upcoming?api_key=" + Url.APIKey.rawValue + page)!
-    
-    return getMoviesArray(url: url)
+    return URL(string: Url.baseUrl.rawValue + "upcoming?api_key=" + Url.APIKey.rawValue + page)!
 }
 
 
-func getPopular(numPage: Int) -> [Movie]
+func getPopular(numPage: Int) -> URL
 {
     let page = "&page=" + String(numPage)
-    let url = URL(string: Url.baseUrl.rawValue + "popular?api_key=" + Url.APIKey.rawValue + page)!
-    
-    return getMoviesArray(url: url)
+    return URL(string: Url.baseUrl.rawValue + "popular?api_key=" + Url.APIKey.rawValue + page)!
 }
 
 
-func getTopRated(numPage: Int) -> [Movie]
+func getTopRated(numPage: Int) -> URL
 {
     let page = "&page=" + String(numPage)
-    let url = URL(string: Url.baseUrl.rawValue + "top_rated?api_key=" + Url.APIKey.rawValue + page)!
-    
-    return getMoviesArray(url: url)
+    return URL(string: Url.baseUrl.rawValue + "top_rated?api_key=" + Url.APIKey.rawValue + page)!
 }
 
 
-func getSimilarMovies(numPage: Int, movieID: Int) -> [Movie]
+func getSimilarMovies(numPage: Int, movieID: Int) -> URL
 {
     let page = "&page=" + String(numPage)
-    let url = URL(string: Url.baseUrl.rawValue + String(movieID) + "/similar?api_key=" + Url.APIKey.rawValue + page)!
-    
-    return getMoviesArray(url: url)
+    return URL(string: Url.baseUrl.rawValue + String(movieID) + "/similar?api_key=" + Url.APIKey.rawValue + page)!
 }
