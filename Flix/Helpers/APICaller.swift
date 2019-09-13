@@ -46,4 +46,22 @@ struct APICaller
         
         return movies
     }
+    
+    
+    static func getYouTubeTrailerUrl(dataDictionary: NSDictionary) -> URL
+    {
+        let videosJSON = dataDictionary["results"] as! [NSDictionary]
+        
+        for video in videosJSON
+        {
+            if video["site"] as! String == "YouTube"
+            {
+                let key = video["key"] as! String
+                let baseURL = "https://www.youtube.com/watch?v="
+                
+                return URL(string: baseURL + key)!
+            }
+        }
+        return URL(string: "https://www.youtube.com/")!
+    }
 }
