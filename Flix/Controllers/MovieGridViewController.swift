@@ -28,32 +28,14 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let width = (view.frame.size.width - layout.minimumInteritemSpacing) / 2
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                let moviesJSON = dataDictionary["results"] as! [[String: Any]]
-                
-                for movie in moviesJSON
-                {
-                    let movie = Movie(title: movie["title"] as! String,
-                                      overview: movie["overview"] as! String,
-                                      releaseDate: movie["release_date"] as! String,
-                                      posterPath: movie["poster_path"] as! String,
-                                      backdropPath: movie["backdrop_path"] as! String,
-                                      avgVotes: movie["vote_average"] as! Double,
-                                      id: movie["id"] as! Int)
-                    self.movies.append(movie)
-                }
-                self.collectionView.reloadData()
-            }
-        }
-        task.resume()
+        let url = getSimilarMovies(numPage: 1, movieID: 297762)
+        
+        getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
+            self.movies = getMoviesArray(dataDictionary: dataDictionary)
+            self.collectionView.reloadData()
+        }, failure: { (Error) in
+            print(Error.localizedDescription)
+        })
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -64,10 +46,7 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
         
         let movie = movies[indexPath.item]
-        
-        let baseUrl = "https://image.tmdb.org/t/p/w185"
-        let posterPath = movie.posterPath
-        let posterUrl = URL(string: baseUrl + posterPath)
+        let posterUrl = URL(string: Url.basePosterUrl.rawValue + movie.posterPath)
         
         cell.posterView.af_setImage(withURL: posterUrl!)
         

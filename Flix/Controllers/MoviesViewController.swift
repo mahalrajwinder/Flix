@@ -20,32 +20,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                let moviesJSON = dataDictionary["results"] as! [[String: Any]]
-                
-                for movie in moviesJSON
-                {
-                    let movie = Movie(title: movie["title"] as! String,
-                                      overview: movie["overview"] as! String,
-                                      releaseDate: movie["release_date"] as! String,
-                                      posterPath: movie["poster_path"] as! String,
-                                      backdropPath: movie["backdrop_path"] as! String,
-                                      avgVotes: movie["vote_average"] as! Double,
-                                      id: movie["id"] as! Int)
-                    self.movies.append(movie)
-                }
-                self.tableView.reloadData()
-            }
-        }
-        task.resume()
+        let url = getNowPlaying(numPage: 1)
+        
+        getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
+            self.movies = getMoviesArray(dataDictionary: dataDictionary)
+            self.tableView.reloadData()
+        }, failure: { (Error) in
+            print(Error.localizedDescription)
+        })
         
         // Sets movie cell height based on device's screen width
         let heightRatio = UIScreen.main.bounds.width / 414
@@ -64,10 +46,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.titleLabel.text = movie.title
         cell.synopsisLabel.text = movie.overview
         
-        let baseUrl = "https://image.tmdb.org/t/p/w185"
-        let posterPath = movie.posterPath
-        let posterUrl = URL(string: baseUrl + posterPath)
-        
+        let posterUrl = URL(string: Url.basePosterUrl.rawValue + movie.posterPath)
         cell.posterView.af_setImage(withURL: posterUrl!)
         
         return cell
