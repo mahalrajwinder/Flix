@@ -28,10 +28,9 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let width = (view.frame.size.width - layout.minimumInteritemSpacing) / 2
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
         
-        let url = getSimilarMovies(numPage: 1, movieID: 297762)
-        
-        getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
-            self.movies = getMoviesArray(dataDictionary: dataDictionary)
+        let url = Url.similar(numPage: 1, movieID: 297762)
+        APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
+            self.movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
             self.collectionView.reloadData()
         }, failure: { (Error) in
             print(Error.localizedDescription)

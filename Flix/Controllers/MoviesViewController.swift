@@ -20,10 +20,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         
-        let url = getNowPlaying(numPage: 1)
-        
-        getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
-            self.movies = getMoviesArray(dataDictionary: dataDictionary)
+        let url = Url.nowPlaying.url(numPage: 1)
+        APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
+            self.movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
             self.tableView.reloadData()
         }, failure: { (Error) in
             print(Error.localizedDescription)
