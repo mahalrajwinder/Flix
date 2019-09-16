@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Top Picks for you-->
+        <!--Movies View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MoviesViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoviesVC" id="BYZ-38-t0r" customClass="MoviesViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,14 +64,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Top Picks for you" id="KMm-zS-hqi"/>
+                    <navigationItem key="navigationItem" id="KMm-zS-hqi"/>
                     <connections>
                         <outlet property="tableView" destination="WiY-cq-OBv" id="Osk-qk-U3P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1035" y="340"/>
+            <point key="canvasLocation" x="-588.40579710144937" y="1076.7857142857142"/>
         </scene>
         <!--Movies Details View Controller-->
         <scene sceneID="8Ee-U5-ei5">
@@ -192,7 +192,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NDK-rf-Ifq"/>
+                        <segue destination="JFC-eB-fVg" kind="relationship" relationship="rootViewController" id="WTT-fL-7y7"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4P-xg-MJV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -325,6 +325,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SNf-NK-GGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="222" y="340"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0pV-w5-0PH">
+            <objects>
+                <viewController id="JFC-eB-fVg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6wS-bS-VRb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not yet IMPLEMENTED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUP-SE-J6u">
+                                <rect key="frame" x="119" y="226" width="177" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="79Q-Ox-f8C"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nw0-V5-V2V"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sKr-dZ-VnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1035" y="340"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="few-M0-RgH">

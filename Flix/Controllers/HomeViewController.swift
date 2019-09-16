@@ -68,6 +68,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         button.setTitle("See All", for: .normal)
         button.titleLabel?.font = UIFont(name:"verdana-Bold", size: 12.0)
         
+        button.tag = section
+        button.addTarget(self, action: #selector(onSeeAllButton(sender:)), for: .touchUpInside)
+        
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: layoutSizes.headerHeight))
         headerView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
         headerView.addSubview(label)
@@ -113,6 +116,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         guard let homeCell = cell as? HomeTableCell else { return }
         
         homeCell.setCollectionViewDataSourceDelegate(self, forSection: indexPath.section, cellWidth: layoutSizes.cellWidth, cellHeight: layoutSizes.cellHeight, sidePadding: layoutSizes.sidePadding, interItemSpace: layoutSizes.interItemSpace)
+    }
+    
+    
+    // MARK: - Navigation
+    
+    @objc func onSeeAllButton(sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let moviesVC = storyboard.instantiateViewController(withIdentifier: "MoviesVC") as! MoviesViewController
+        
+        moviesVC.movies = self.movies[sender.tag]
+        moviesVC.movieCategory = self.categories[sender.tag].0
+        moviesVC.categoryFunc = self.categories[sender.tag].1
+        
+        self.navigationController?.pushViewController(moviesVC, animated: true)
     }
     
     

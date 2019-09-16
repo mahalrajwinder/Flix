@@ -152,11 +152,11 @@
 		551D7F0D2329A50700860939 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				55266A6422604A8A0093DE1C /* MoviesViewController.swift */,
+				555DC9C6232C3CD9003CA80A /* HomeViewController.swift */,
 				559AAFA4226AA7620048FA29 /* MovieGridViewController.swift */,
+				55266A6422604A8A0093DE1C /* MoviesViewController.swift */,
 				559AAFA2226A9B7A0048FA29 /* MoviesDetailsViewController.swift */,
 				55C225FF226AEA410051898C /* movieTrailerViewController.swift */,
-				555DC9C6232C3CD9003CA80A /* HomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

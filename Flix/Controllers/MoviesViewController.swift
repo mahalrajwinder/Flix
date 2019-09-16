@@ -12,21 +12,22 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
+    var movieCategory: String!
+    var categoryFunc: ((Int) -> URL)!
     var movies = [Movie]()
-
+    var page = 1
+    
+    let myRefreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+        self.title = movieCategory
         
-        let url = Url.nowPlaying.url(numPage: 1)
-        APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
-            self.movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
-            self.tableView.reloadData()
-        }, failure: { (Error) in
-            print(Error.localizedDescription)
-        })
+        myRefreshControl.addTarget(self, action: #selector(loadMovies), for: .valueChanged)
+        tableView.refreshControl = myRefreshControl
         
         // Sets movie cell height based on device's screen width
         let heightRatio = UIScreen.main.bounds.width / 414
@@ -34,8 +35,39 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
+    @objc func loadMovies() {
+        page = 1
+        let url = categoryFunc(page)
+        APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
+            self.movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
+            self.tableView.reloadData()
+            self.myRefreshControl.endRefreshing()
+            }, failure: { (Error) in
+            print(Error.localizedDescription)
+            })
+    }
+    
+    func loadMoreMovies() {
+        page += 1
+        let url = categoryFunc(page)
+        APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
+            let movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
+            self.movies.append(contentsOf: movies)
+            self.tableView.reloadData()
+        }, failure: { (Error) in
+            print(Error.localizedDescription)
+        })
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
+    }
+    
+    // Enables infinite scroll
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 2 == movies.count {
+            loadMoreMovies()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
