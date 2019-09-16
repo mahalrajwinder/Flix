@@ -12,8 +12,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
+    let categories = [("Trending Now", Url.dailyTrending.url), ("Top Movies", Url.topRated.url), ("Popular", Url.popular.url), ("Upcoming", Url.upcoming.url)]
     var layoutSizes: LayoutSizes!
-    let categoryURL = [Url.nowPlaying.url(numPage: 1), Url.upcoming.url(numPage: 1)]
     var movies = [[Movie]]()
     
     override func viewDidLoad() {
@@ -24,16 +24,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         layoutSizes = getLayoutSizes()
         
-        var remainingURLs = categoryURL.count
+        var remainingCategories = categories.count
         
-        for url in categoryURL
+        for (_, f) in categories
         {
-            remainingURLs -= 1
+            remainingCategories -= 1
             
-            APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
+            APICaller.getDataDictionary(url: f(1), success: { (dataDictionary: NSDictionary) in
                 self.movies.append(APICaller.getMoviesArray(dataDictionary: dataDictionary))
                 
-                if remainingURLs == 0
+                if remainingCategories == 0
                 {
                     self.tableView.reloadData()
                 }
@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let frame: CGRect = tableView.frame
         
         let label = UILabel(frame: CGRect(x: layoutSizes.sidePadding, y: layoutSizes.headerTopPadding, width: frame.size.width / 2, height: 12))
-        label.text = "Section Title \(section)"
+        label.text = categories[section].0
         label.textColor = UIColor.white
         label.numberOfLines = 1
         label.font = UIFont(name:"verdana-Bold", size: 16.0)
@@ -68,12 +68,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         button.setTitle("See All", for: .normal)
         button.titleLabel?.font = UIFont(name:"verdana-Bold", size: 12.0)
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 36))
-        headerView.backgroundColor = UIColor.darkGray
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: layoutSizes.headerHeight))
+        headerView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
         headerView.addSubview(label)
         headerView.addSubview(button)
         
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return layoutSizes.sidePadding
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: layoutSizes.sidePadding))
+        footerView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
+        
+        return footerView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,7 +102,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableCell") as! HomeTableCell
-        cell.backgroundColor = UIColor.darkGray
+        cell.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
 
@@ -111,23 +122,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if UIDevice.current.userInterfaceIdiom == .pad
         {
-            var width = (tableView.frame.size.width - 64) / 3
+            var width = (tableView.frame.size.width - 76) / 3
             if width > 185 {
                 width = CGFloat(185)
             }
             let height = heightToWidthRatio * width
             
-            return LayoutSizes(sidePadding: 20, interItemSpace: 8, cellWidth: width, cellHeight: height, headerHeight: 46, headerTopPadding: 25)
+            return LayoutSizes(sidePadding: 20, interItemSpace: 12, cellWidth: width, cellHeight: height, headerHeight: 36, headerTopPadding: 12)
         }
         else
         {
-            var width = (tableView.frame.size.width - 32) / 3
+            var width = (tableView.frame.size.width - 44) / 3
             if width > 185 {
                 width = CGFloat(185)
             }
             let height = heightToWidthRatio * width
             
-            return LayoutSizes(sidePadding: 10, interItemSpace: 4, cellWidth: width, cellHeight: height, headerHeight: 36, headerTopPadding: 15)
+            return LayoutSizes(sidePadding: 10, interItemSpace: 8, cellWidth: width, cellHeight: height, headerHeight: 26, headerTopPadding: 3)
         }
     }
 
