@@ -20,13 +20,16 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        let layoutSizes = getLayoutSizes()
+
+        collectionView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: layoutSizes.sidePadding, bottom: 0, right: layoutSizes.sidePadding)
+        
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
-        layout.minimumLineSpacing = 4
-        layout.minimumInteritemSpacing = 4
-        
-        let width = (view.frame.size.width - layout.minimumInteritemSpacing) / 2
-        layout.itemSize = CGSize(width: width, height: width * 3 / 2)
+        layout.minimumLineSpacing = layoutSizes.interItemSpace
+        layout.minimumInteritemSpacing = layoutSizes.interItemSpace
+        layout.itemSize = CGSize(width: layoutSizes.cellWidth, height: layoutSizes.cellHeight)
         
         let url = Url.nowPlaying.url(numPage: 1)
         APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
@@ -65,4 +68,29 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     
+    func getLayoutSizes() -> LayoutSizes
+    {
+        let heightToWidthRatio : CGFloat = 278 / 185.0
+        
+        if UIDevice.current.userInterfaceIdiom == .pad
+        {
+            var width = (collectionView.frame.size.width - 76) / 3
+            if width > 185 {
+                width = CGFloat(185)
+            }
+            let height = heightToWidthRatio * width
+            
+            return LayoutSizes(sidePadding: 20, interItemSpace: 12, cellWidth: width, cellHeight: height, headerHeight: 36, headerTopPadding: 12)
+        }
+        else
+        {
+            var width = (collectionView.frame.size.width - 44) / 3
+            if width > 185 {
+                width = CGFloat(185)
+            }
+            let height = heightToWidthRatio * width
+            
+            return LayoutSizes(sidePadding: 10, interItemSpace: 8, cellWidth: width, cellHeight: height, headerHeight: 26, headerTopPadding: 3)
+        }
+    }
 }

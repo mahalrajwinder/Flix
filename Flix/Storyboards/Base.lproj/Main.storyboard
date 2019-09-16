@@ -299,13 +299,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="202" height="305"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akt-dW-04i">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Akt-dW-04i">
                                                     <rect key="frame" x="0.0" y="0.0" width="202" height="305"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Akt-dW-04i" firstAttribute="top" secondItem="IDO-9p-ZXR" secondAttribute="top" id="32O-FF-xHG"/>
+                                            <constraint firstItem="Akt-dW-04i" firstAttribute="leading" secondItem="IDO-9p-ZXR" secondAttribute="leading" id="V45-us-AlJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Akt-dW-04i" secondAttribute="trailing" id="fk2-Ro-0Xx"/>
+                                            <constraint firstAttribute="bottom" secondItem="Akt-dW-04i" secondAttribute="bottom" id="g2P-E2-Yii"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="posterView" destination="Akt-dW-04i" id="jGu-Wb-xP6"/>
                                             <segue destination="UXZ-XC-8Uv" kind="show" id="OIi-YS-8Wx"/>
@@ -396,6 +401,6 @@
         <image name="now_playing_tabbar_item" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="t0Y-PU-lRV"/>
+        <segue reference="OIi-YS-8Wx"/>
     </inferredMetricsTieBreakers>
 </document>
