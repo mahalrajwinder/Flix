@@ -26,7 +26,7 @@ extension HomeTableCell {
         collectionView.dataSource = dataSourceDelegate
         collectionView.tag = section
         
-        collectionView.backgroundColor = UIColor.darkGray
+        collectionView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         
