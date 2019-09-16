@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Top Picks for you-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,14 +64,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="KMm-zS-hqi"/>
+                    <navigationItem key="navigationItem" title="Top Picks for you" id="KMm-zS-hqi"/>
                     <connections>
                         <outlet property="tableView" destination="WiY-cq-OBv" id="Osk-qk-U3P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613" y="459"/>
+            <point key="canvasLocation" x="1035" y="340"/>
         </scene>
         <!--Movies Details View Controller-->
         <scene sceneID="8Ee-U5-ei5">
@@ -128,7 +128,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-100" y="1150"/>
+            <point key="canvasLocation" x="222" y="1078"/>
         </scene>
         <!--Movie Trailer View Controller-->
         <scene sceneID="utw-kq-QdU">
@@ -159,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYz-Lr-Vw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-100" y="1902"/>
+            <point key="canvasLocation" x="222" y="1793"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TT1-N2-YH8">
@@ -180,11 +180,11 @@
             </objects>
             <point key="canvasLocation" x="222" y="-1127"/>
         </scene>
-        <!--Now Playing-->
+        <!--Favorite-->
         <scene sceneID="qUM-cN-aZk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t6w-cr-M6g" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Now Playing" image="now_playing_tabbar_item" id="7eV-bh-Y3n"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" image="favorite_dark" id="7eV-bh-Y3n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F0c-2m-ke2">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -197,7 +197,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4P-xg-MJV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="513" y="-312"/>
+            <point key="canvasLocation" x="1035" y="-395"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="HyB-VU-k94">
@@ -271,9 +271,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IXx-ay-jG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2065.217391304348" y="373.66071428571428"/>
+            <point key="canvasLocation" x="-587" y="340"/>
         </scene>
-        <!--Superhero-->
+        <!--Now Playing-->
         <scene sceneID="jVL-mb-twu">
             <objects>
                 <viewController id="YTf-Dh-liF" customClass="MovieGridViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
@@ -317,20 +317,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8dP-dR-l0o"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Superhero" id="MES-q0-ADt"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="MES-q0-ADt"/>
                     <connections>
                         <outlet property="collectionView" destination="lNL-RT-Cnb" id="U3P-df-LQ8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SNf-NK-GGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-268" y="329"/>
+            <point key="canvasLocation" x="222" y="340"/>
         </scene>
-        <!--Superhero-->
+        <!--Now Playing-->
         <scene sceneID="few-M0-RgH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i64-e9-1dt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Superhero" image="superhero_tabbar_item" id="vfY-kE-Y2P"/>
+                    <tabBarItem key="tabBarItem" title="Now Playing" image="now_playing_tabbar_item" id="vfY-kE-Y2P"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7ws-ef-sOp">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -343,13 +343,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XTs-9a-9g3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-267" y="-408"/>
+            <point key="canvasLocation" x="222" y="-395"/>
         </scene>
         <!--Home-->
         <scene sceneID="dbu-iD-bfg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="egI-CH-II3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="Mam-jK-4Ne"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" id="Mam-jK-4Ne"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dVC-M4-FJi">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -362,14 +362,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtS-De-7FR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1122" y="-374"/>
+            <point key="canvasLocation" x="-586" y="-395"/>
         </scene>
     </scenes>
     <resources>
+        <image name="favorite_dark" width="21" height="21"/>
+        <image name="home" width="21" height="21"/>
         <image name="now_playing_tabbar_item" width="21" height="21"/>
-        <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OIi-YS-8Wx"/>
+        <segue reference="t0Y-PU-lRV"/>
     </inferredMetricsTieBreakers>
 </document>
