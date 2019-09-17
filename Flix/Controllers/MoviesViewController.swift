@@ -29,9 +29,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         myRefreshControl.addTarget(self, action: #selector(loadMovies), for: .valueChanged)
         tableView.refreshControl = myRefreshControl
         
-        // Sets movie cell height based on device's screen width
-        let heightRatio = UIScreen.main.bounds.width / 414
-        tableView.rowHeight = 172 * heightRatio
+        let heightRatio = UIScreen.main.bounds.width / 414.0
+        var height = 217.0 * heightRatio
+        if height > 278 {
+            height = CGFloat(278)
+        }
+        
+        tableView.rowHeight = height
     }
     
     
