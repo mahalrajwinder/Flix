@@ -8,10 +8,9 @@
 import UIKit
 
 
-struct APICaller
-{
-    static func getDataDictionary(url: URL, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ())
-    {
+struct APICaller {
+    
+    static func getDataDictionary(url: URL, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         
@@ -26,14 +25,12 @@ struct APICaller
         task.resume()
     }
 
-
-    static func getMoviesArray(dataDictionary: NSDictionary) -> [Movie]
-    {
+    
+    static func getMoviesArray(dataDictionary: NSDictionary) -> [Movie] {
         var movies = [] as! [Movie]
         let moviesJSON = dataDictionary["results"] as! [NSDictionary]
         
-        for movie in moviesJSON
-        {
+        for movie in moviesJSON {
             let movie = Movie(title: movie["title"] as! String,
                               overview: movie["overview"] as! String,
                               releaseDate: movie["release_date"] as! String,
@@ -48,14 +45,11 @@ struct APICaller
     }
     
     
-    static func getYouTubeTrailerUrl(dataDictionary: NSDictionary) -> URL
-    {
+    static func getYouTubeTrailerUrl(dataDictionary: NSDictionary) -> URL {
         let videosJSON = dataDictionary["results"] as! [NSDictionary]
         
-        for video in videosJSON
-        {
-            if video["site"] as! String == "YouTube"
-            {
+        for video in videosJSON {
+            if video["site"] as! String == "YouTube" {
                 let key = video["key"] as! String
                 let baseURL = "https://www.youtube.com/watch?v="
                 

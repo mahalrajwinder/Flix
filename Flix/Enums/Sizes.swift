@@ -8,8 +8,7 @@
 import UIKit
 
 
-struct LayoutSizes
-{
+struct LayoutSizes {
     let sidePadding: CGFloat
     let interItemSpace: CGFloat
     let cellWidth: CGFloat

@@ -8,16 +8,19 @@
 import UIKit
 import AlamofireImage
 
+
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    let myRefreshControl = UIRefreshControl()
     var movieCategory: String!
     var categoryFunc: ((Int) -> URL)!
     var movies = [Movie]()
     var page = 1
     
-    let myRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +37,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         if height > 278 {
             height = CGFloat(278)
         }
-        
         tableView.rowHeight = height
     }
     
     
+    // MARK: - Functions for requesting data.
+    
     @objc func loadMovies() {
         page = 1
         let url = categoryFunc(page)
+        
+        // Request the data and reload the table view.
         APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
             self.movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
             self.tableView.reloadData()
@@ -54,6 +60,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func loadMoreMovies() {
         page += 1
         let url = categoryFunc(page)
+        
+        // Request the data and reload the table view.
         APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
             let movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
             self.movies.append(contentsOf: movies)
@@ -63,11 +71,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
+    
+    // MARK: - Table view data source
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
     
-    // Enables infinite scroll
+    // This function enables the infinite scroll.
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 2 == movies.count {
             loadMoreMovies()
@@ -88,8 +99,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         // Find the selected movie
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPath(for: cell)!
@@ -102,5 +114,4 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // De-selects the selected movie cell
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }

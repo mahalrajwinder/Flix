@@ -7,8 +7,10 @@
 
 import UIKit
 
+
 class HomeTableCell: UITableViewCell {
 
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -30,6 +32,7 @@ extension HomeTableCell {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         
+        // Handles the layout of the movie grid cells.
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumLineSpacing = space
         layout.minimumInteritemSpacing = space

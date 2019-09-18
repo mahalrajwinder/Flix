@@ -8,11 +8,15 @@
 import UIKit
 import AlamofireImage
 
+
 class MovieGridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     var movies = [Movie]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +26,16 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         
         let layoutSizes = getLayoutSizes()
 
-        collectionView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
+        collectionView.backgroundColor = Color.darkBG.get()
         collectionView.contentInset = UIEdgeInsets(top: 0, left: layoutSizes.sidePadding, bottom: 0, right: layoutSizes.sidePadding)
         
+        // Handles the layout of the movie grid cells.
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        
         layout.minimumLineSpacing = layoutSizes.interItemSpace
         layout.minimumInteritemSpacing = layoutSizes.interItemSpace
         layout.itemSize = CGSize(width: layoutSizes.cellWidth, height: layoutSizes.cellHeight)
         
+        // Request the data and reload the collection view.
         let url = Url.nowPlaying.url(numPage: 1)
         APICaller.getDataDictionary(url: url, success: { (dataDictionary: NSDictionary) in
             self.movies = APICaller.getMoviesArray(dataDictionary: dataDictionary)
@@ -39,6 +44,9 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
             print(Error.localizedDescription)
         })
     }
+    
+    
+    // MARK: - Collection view data source
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -55,8 +63,10 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
+    
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         // Find the selected movie
         let cell = sender as! UICollectionViewCell
         let indexPath = collectionView.indexPath(for: cell)!
@@ -68,12 +78,12 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     
-    func getLayoutSizes() -> LayoutSizes
-    {
+    // MARK: - Helper functions for the layout.
+    
+    func getLayoutSizes() -> LayoutSizes {
         let heightToWidthRatio : CGFloat = 278 / 185.0
         
-        if UIDevice.current.userInterfaceIdiom == .pad
-        {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             var width = (collectionView.frame.size.width - 76) / 3
             if width > 185 {
                 width = CGFloat(185)
@@ -81,9 +91,7 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
             let height = heightToWidthRatio * width
             
             return LayoutSizes(sidePadding: 20, interItemSpace: 12, cellWidth: width, cellHeight: height, headerHeight: 36, headerTopPadding: 12)
-        }
-        else
-        {
+        } else {
             var width = (collectionView.frame.size.width - 44) / 3
             if width > 185 {
                 width = CGFloat(185)

@@ -8,8 +8,7 @@
 import Foundation
 
 
-enum Url: String
-{
+enum Url: String {
     case baseURL = "https://api.themoviedb.org/3/"
     case basePosterUrl = "https://image.tmdb.org/t/p/w185"
     case baseBackdropUrl = "https://image.tmdb.org/t/p/w780"
@@ -21,35 +20,28 @@ enum Url: String
     case dailyTrending = "trending/movie/day"
     
     
-    func url(numPage: Int) -> URL
-    {
+    func url(numPage: Int) -> URL {
         let urlPath = Url.APIKey.rawValue + "&page=" + String(numPage)
         
-        if self.rawValue == Url.dailyTrending.rawValue
-        {
+        if self.rawValue == Url.dailyTrending.rawValue {
             return URL(string: Url.baseURL.rawValue + self.rawValue + urlPath)!
-        }
-        else
-        {
+        } else {
             return URL(string: Url.baseURL.rawValue + "movie/" + self.rawValue + urlPath)!
         }
     }
     
     
-    static func latest() -> URL
-    {
+    static func latest() -> URL {
         return URL(string: Url.baseURL.rawValue + "movie/latest" + Url.APIKey.rawValue)!
     }
     
     
-    static func video(movieID: Int) -> URL
-    {
+    static func video(movieID: Int) -> URL {
         return URL(string: Url.baseURL.rawValue + "movie/" + String(movieID) + "/videos" + Url.APIKey.rawValue)!
     }
     
     
-    static func similar(numPage: Int, movieID: Int) -> URL
-    {
+    static func similar(numPage: Int, movieID: Int) -> URL {
         let urlPath = Url.APIKey.rawValue + "&page=" + String(numPage)
         
         return URL(string: Url.baseURL.rawValue + "movie/" + String(movieID) + "/similar" + urlPath)!

@@ -8,13 +8,17 @@
 import UIKit
 import AlamofireImage
 
+
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    
     @IBOutlet weak var tableView: UITableView!
+    
     
     let categories = [("Trending Now", Url.dailyTrending.url), ("Top Movies", Url.topRated.url), ("Popular", Url.popular.url), ("Upcoming", Url.upcoming.url)]
     var layoutSizes: LayoutSizes!
     var movies = [[Movie]]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +30,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         var remainingCategories = categories.count
         
-        for (_, f) in categories
-        {
+        for (_, f) in categories {
             remainingCategories -= 1
             
             APICaller.getDataDictionary(url: f(1), success: { (dataDictionary: NSDictionary) in
                 self.movies.append(APICaller.getMoviesArray(dataDictionary: dataDictionary))
                 
-                if remainingCategories == 0
-                {
+                if remainingCategories == 0 {
                     self.tableView.reloadData()
                 }
             }, failure: { (Error) in
@@ -43,11 +45,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    
+    // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return layoutSizes.headerHeight
@@ -72,7 +75,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         button.addTarget(self, action: #selector(onSeeAllButton(sender:)), for: .touchUpInside)
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: layoutSizes.headerHeight))
-        headerView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
+        headerView.backgroundColor = Color.darkBG.get()
         headerView.addSubview(label)
         headerView.addSubview(button)
         
@@ -85,7 +88,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: layoutSizes.sidePadding))
-        footerView.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
+        footerView.backgroundColor = Color.darkBG.get()
         
         return footerView
     }
@@ -99,20 +102,21 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return layoutSizes.cellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableCell") as! HomeTableCell
-        cell.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 1)
+        cell.backgroundColor = Color.darkBG.get()
+        
+        // Prevents selecting the table view row/cell.
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
         return cell
 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         guard let homeCell = cell as? HomeTableCell else { return }
         
         homeCell.setCollectionViewDataSourceDelegate(self, forSection: indexPath.section, cellWidth: layoutSizes.cellWidth, cellHeight: layoutSizes.cellHeight, sidePadding: layoutSizes.sidePadding, interItemSpace: layoutSizes.interItemSpace)
@@ -133,12 +137,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    func getLayoutSizes() -> LayoutSizes
-    {
+    // MARK: - Helper functions for layout
+    
+    func getLayoutSizes() -> LayoutSizes {
         let heightToWidthRatio : CGFloat = 278 / 185.0
         
-        if UIDevice.current.userInterfaceIdiom == .pad
-        {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             var width = (tableView.frame.size.width - 76) / 3
             if width > 185 {
                 width = CGFloat(185)
@@ -146,9 +150,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let height = heightToWidthRatio * width
             
             return LayoutSizes(sidePadding: 20, interItemSpace: 12, cellWidth: width, cellHeight: height, headerHeight: 36, headerTopPadding: 12)
-        }
-        else
-        {
+        } else {
             var width = (tableView.frame.size.width - 44) / 3
             if width > 185 {
                 width = CGFloat(185)
@@ -158,12 +160,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return LayoutSizes(sidePadding: 10, interItemSpace: 8, cellWidth: width, cellHeight: height, headerHeight: 26, headerTopPadding: 3)
         }
     }
-
 }
 
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // MARK: - Collection view data source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

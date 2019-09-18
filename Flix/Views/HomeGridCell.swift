@@ -7,10 +7,12 @@
 
 import UIKit
 
+
 class HomeGridCell: UICollectionViewCell {
     
     
     @IBOutlet weak var posterView: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

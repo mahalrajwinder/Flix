@@ -8,16 +8,18 @@
 import UIKit
 import WebKit
 
+
 class movieTrailerViewController: UIViewController, WKUIDelegate {
     
-    var webView: WKWebView!
     
+    var webView: WKWebView!
     var movieId : Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add webview
+        // Configure and add the webview.
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: CGRect(x: 0, y: 88, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height - 88)), configuration: webConfiguration)
         webView.allowsBackForwardNavigationGestures = true
@@ -35,9 +37,10 @@ class movieTrailerViewController: UIViewController, WKUIDelegate {
         })
     }
     
-
+    
+    // MARK: - Action handlers
+    
     @IBAction func hideTrailer(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }

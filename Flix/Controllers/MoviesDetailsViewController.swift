@@ -8,14 +8,18 @@
 import UIKit
 import AlamofireImage
 
+
 class MoviesDetailsViewController: UIViewController {
+    
     
     @IBOutlet weak var backdropView: UIImageView!
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var synopsisLabel: UILabel!
     
+    
     var movie: Movie!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +38,18 @@ class MoviesDetailsViewController: UIViewController {
         backdropView.af_setImage(withURL: backdropUrl!)
     }
     
+    
+    // MARK: - Action handlers
+    
     @IBAction func onPosterTapped(_ sender: Any) {
         performSegue(withIdentifier: "showTrailer", sender: nil)
     }
+    
+    
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let trailerViewController = segue.destination as! movieTrailerViewController
         trailerViewController.movieId = movie.id
     }
-    
 }
