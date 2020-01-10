@@ -5,7 +5,7 @@ Flix is a simple iOS app that allows users to browse movies. Built using the [Th
 <img src="/static_assets/app_screenShot.png?raw=true" width="500" alt="App Screen Shot"><br>
 ---
 
-### User Stories
+## User Stories
 
 #### REQUIRED (10pts)
 - [x] (2pts) User sees an app icon on the home screen and a styled launch screen.
@@ -19,11 +19,12 @@ Flix is a simple iOS app that allows users to browse movies. Built using the [Th
 - [x] (2pts) User can tap a poster in the collection view to see a detail screen of that movie.
 - [x] (2pts) In the detail view, when the user taps the poster, a new screen is presented modally where they can view the trailer.
 
-### App Walkthough GIF
+## Video Walkthrough
 <img src="http://g.recordit.co/B4NrtlS11S.gif" width=250> <img src="http://g.recordit.co/i9GecqlXRB.gif" width=250><br>
 
 <img src="http://g.recordit.co/EZhbyoCiHA.gif" width=250> <img src="http://g.recordit.co/dmIP2q2QY8.gif" width=350><br>
-###### Real Device
+#### Real Device
 <img src="http://g.recordit.co/NbeC3tKBJV.gif" width=250><br>
 
-### Notes
+## License
+This app is licensed under the terms of the MIT license. See [LICENSE](LICENSE) for more information.
